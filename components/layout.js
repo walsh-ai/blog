@@ -8,7 +8,7 @@ const name = 'Thomas J Walsh';
 const ogImage = "https://i.pinimg.com/564x/16/59/b3/1659b3f379ccd67500d88ce0a4bc5e8a.jpg";
 export const siteTitle = 'Thomas J Walsh | Blog - AI';
 
-export default function Layout({ children, home }) {
+export default function Layout({ children, home, hideFace }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -34,35 +34,39 @@ export default function Layout({ children, home }) {
       </Head>
       
       <header className={styles.header}>
-        {home ? (
+        {hideFace ? (<></>) : (
           <>
-            <Image
-              priority
-              src="/images/profile.jpg"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt=""
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
+          {home ? (
+            <>
               <Image
                 priority
                 src="/images/profile.jpg"
                 className={utilStyles.borderCircle}
-                height={108}
-                width={108}
+                height={144}
+                width={144}
                 alt=""
               />
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/" className={utilStyles.colorInherit}>
-                {name}
+              <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            </>
+          ) : (
+            <>
+              <Link href="/">
+                <Image
+                  priority
+                  src="/images/profile.jpg"
+                  className={utilStyles.borderCircle}
+                  height={108}
+                  width={108}
+                  alt=""
+                />
               </Link>
-            </h2>
+              <h2 className={utilStyles.headingLg}>
+                <Link href="/" className={utilStyles.colorInherit}>
+                  {name}
+                </Link>
+              </h2>
+            </>
+          )}
           </>
         )}
       </header>

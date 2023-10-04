@@ -3,6 +3,10 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getPostsMetadata } from '../lib/posts';
 
+// Imports for displaying and linking posts
+import Link from 'next/link';
+import Date from '../components/date'; 
+
 export async function getStaticProps() {
   const allPostsMetadata = getPostsMetadata(); 
   return {
@@ -36,11 +40,11 @@ export default function Home({ allPostsMetadata }) {
         <ul className = {utilStyles.list}>
           {allPostsMetadata.map(({ id, date, title }) => (
             <li className = {utilStyles.listItem} key={id}>
-              {title}
+              <Link href = {`/posts/${id}`}>{title}</Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <small className = {utilStyles.lightText}>
+                <Date dateString = {date}></Date>
+              </small>
             </li>
           ))}
         </ul>
